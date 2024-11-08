@@ -72,9 +72,67 @@ function App() {
     );
   }
 
+  function FormSubmit() {
+    const handleform = (e) => {
+      e.preventDefault();
+      alert("Submitting...");
+    };
+
+    return (
+      <>
+        <form>
+          <input type="text" />
+          <button type="submit" onClick={handleform}>
+            Submit
+          </button>
+        </form>
+      </>
+    );
+  }
+
+  const ColorBtn = () => {
+    function Handlecolors() {
+      let color = document.body.style;
+      if (color.backgroundColor === "green") {
+        color.backgroundColor = "white";
+      } else {
+        color.backgroundColor = "green";
+      }
+    }
+
+    return (
+      <>
+        <button onClick={Handlecolors}>Change Color</button>
+      </>
+    );
+  };
+
+  const NestedBtns = () => {
+    function handleinfo(e) {
+      e.stopPropagation();
+      alert("Propagation");
+    }
+
+    function handlePropagation() {
+      alert("Propagated...");
+    }
+
+    return (
+      <>
+        <div onClick={handlePropagation}>
+          <button onClick={handleinfo}>Button1</button>
+          <button onClick={handleinfo}>Button2</button>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       <Greeting name={"Steve"} />
+      <NestedBtns />
+      <FormSubmit />
+      <ColorBtn />
       <Clicked />
       <Button onSmash={() => alert("Naming Event hanler props")}></Button>
       <PlayButton movieName={"John Wick Chapter 4"} />

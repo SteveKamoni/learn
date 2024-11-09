@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 
 function App() {
   const Greeting = ({ name }) => {
@@ -127,10 +128,79 @@ function App() {
     );
   };
 
+  const UserInfo = ({ name, role }) => {
+    return name === undefined ? (
+      <h1>No information on Guest!</h1>
+    ) : (
+      <h1>
+        Hello, {name} and {role}
+      </h1>
+    );
+  };
+
+  const ClickCounter = () => {
+    const [count, setCount] = useState(0);
+
+    const handleCount = () => {
+      setCount((count) => {
+        return count + 1;
+      });
+    };
+
+    return (
+      <>
+        <button onClick={handleCount}>Incriment</button>
+        <p>Incrimented: {count}</p>
+      </>
+    );
+  };
+
+  const RoleBasedGreeting = ({ role }) => {
+    return role === "admin" ? (
+      <h1>Welcome Back Admin!</h1>
+    ) : role === "member" ? (
+      <h1>Welcome Back Member!</h1>
+    ) : (
+      <h1>Welcome Back Guest!</h1>
+    );
+  };
+
+  const RoleBasedGreetingShortened = ({ role }) => {
+    return (
+      <h1>
+        Welcome Back{" "}
+        {role === "admin" ? "Admin!" : role === "member" ? "Member" : "Guest"}
+      </h1>
+    );
+  };
+
+  const FeedbackForm = () => {
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      alert("Well done!");
+    };
+
+    return (
+      <>
+        <form onSubmit={handleSubmit}>
+          <input type="text" />
+          <button type="submit">Submit</button>
+        </form>
+      </>
+    );
+  };
+
   return (
     <>
       <Greeting name={"Steve"} />
+      <UserInfo />
+      <UserInfo name={"Steve"} role={"Administartor"} />
+      <RoleBasedGreeting role={"admin"} />
+      <RoleBasedGreeting />
+      <RoleBasedGreetingShortened role={"member"} />
+      <FeedbackForm />
       <NestedBtns />
+      <ClickCounter />
       <FormSubmit />
       <ColorBtn />
       <Clicked />

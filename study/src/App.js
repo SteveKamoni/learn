@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const Welcome = ({ name }) => {
@@ -63,27 +63,67 @@ function App() {
 
   const Counter = () => {
     function handleIncrement() {
-      setCounter((inc) => inc + 1);
+      setCounter((prev) => prev + 1);
+      setColor("green");
     }
 
     function handleDecrement() {
-      setCount(count - 1);
+      setCounter((prev) => prev - 1);
+      setColor("red");
     }
 
     function handleColor() {
-      setColor(!color);
+      setColor((prev) => !prev);
+    }
+
+    function handleReset() {
+      setCounter(0);
     }
 
     return (
       <>
-        <button
-          onClick={(handleIncrement, handleColor)}
-          style={{ color: color ? "green" : "red" }}
-        >
-          Increment
-        </button>
-        <p>{counter}</p>
+        <button onClick={handleIncrement}>Increment</button>
+        <p style={{ color: color }}>{counter}</p>
         <button onClick={handleDecrement}>Decrement</button>
+        <button onClick={handleColor}>Toggle Color</button> <br />
+        <button onClick={handleReset}>Reset</button>
+      </>
+    );
+  };
+
+  const TimerComponent = () => {
+    const [value, setValue] = useState(10);
+    const [timer, setTimer] = useState(false);
+
+    // Automatically decrement value every second when timer is active
+    useEffect(() => {
+      let interval = null;
+      if (timer) {
+        interval = setInterval(() => {
+          setValue((prev) => (prev > 0 ? prev - 1 : 0)); // Stop at 0
+        }, 1000);
+      } else {
+        clearInterval(interval);
+      }
+      return () => clearInterval(interval); // Clean up on unmount or when timer stops
+    }, [timer]);
+
+    function handleStartStop() {
+      setTimer((prev) => !prev);
+    }
+
+    function handleReset() {
+      setValue(10);
+      setTimer(false);
+    }
+
+    return (
+      <>
+        <br />
+        {/* <button onClick={}>Decrement</button> */}
+        <p>{value}</p>
+        <button onClick={handleStartStop}>{timer ? "Stop" : "Start"}</button>
+        <button onClick={handleReset}>Reset</button>
       </>
     );
   };
@@ -95,6 +135,7 @@ function App() {
       <Message />
       <FormState />
       <Counter />
+      <TimerComponent />
     </>
   );
 }

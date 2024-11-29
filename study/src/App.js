@@ -128,6 +128,56 @@ function App() {
     );
   };
 
+  const TrafficLights = () => {
+    const [traffic, setTraffic] = useState(true);
+
+    function handleTraffic() {
+      setTraffic(!traffic);
+      alert(`${traffic ? "Stop" : "Walk"} is the next one`);
+    }
+
+    return (
+      <>
+        <button
+          onClick={handleTraffic}
+          style={{ color: traffic ? "green" : "red" }}
+        >
+          {traffic ? "walk" : "Stop"}
+        </button>
+      </>
+    );
+  };
+
+  const CounterApp = () => {
+    const [count, setCount] = useState(0);
+
+    function increment() {
+      setCount((val) => val + 2);
+    }
+
+    return (
+      <>
+        <button onClick={increment}>Increment</button>
+        <p>Count: {count}</p>
+      </>
+    );
+  };
+
+  const Button = () => {
+    const [count, setCount] = useState(0);
+
+    function handleClick() {
+      setCount((val) => val + 1);
+      console.log(count);
+    }
+
+    return (
+      <>
+        <button onClick={handleClick}>Press Button</button>
+      </>
+    );
+  };
+
   return (
     <>
       <Welcome name={"Steve"} />
@@ -135,7 +185,13 @@ function App() {
       <Message />
       <FormState />
       <Counter />
-      <TimerComponent />
+      <TimerComponent /> <br />
+      <br />
+      <TrafficLights />
+      <br />
+      <CounterApp />
+      <br />
+      <Button />
     </>
   );
 }

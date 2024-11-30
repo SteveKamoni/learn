@@ -178,6 +178,40 @@ function App() {
     );
   };
 
+  const Person = ({ name }) => {
+    return <h1>Hello, {name}</h1>;
+  };
+
+  const Toogle = () => {
+    const [show, setShow] = useState(false);
+
+    function handleShow() {
+      setShow(!show);
+    }
+
+    return (
+      <>
+        <button onClick={handleShow}>{show ? "Hide" : "Show"}</button>
+        <p>{show ? "This is React" : " "}</p>
+      </>
+    );
+  };
+
+  // function Counter() {
+  //   const [count, setCount] = useState(0);
+
+  //   function increment() {
+  //     setCount((prev) => prev + 1);
+  //   }
+
+  //   return (
+  //     <>
+  //       <button onClick={increment}>Increment</button>
+  //       <p>{count}</p>
+  //     </>
+  //   );
+  // }
+
   return (
     <>
       <Welcome name={"Steve"} />
@@ -192,6 +226,9 @@ function App() {
       <CounterApp />
       <br />
       <Button />
+      <Person name={"Inzhagi"} />
+      <br />
+      <Toogle />
     </>
   );
 }

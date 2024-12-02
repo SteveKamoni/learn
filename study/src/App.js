@@ -212,6 +212,16 @@ function App() {
   //   );
   // }
 
+  const Loading = ({ status }) => {
+    return status === "loading"
+      ? "Loading..."
+      : status === "Success"
+      ? "Data Loadedd"
+      : status === "error"
+      ? "Error Loading Data..."
+      : null;
+  };
+
   return (
     <>
       <Welcome name={"Steve"} />
@@ -229,6 +239,12 @@ function App() {
       <Person name={"Inzhagi"} />
       <br />
       <Toogle />
+      <br />
+      <Loading status={"loading"} />
+      <br />
+      <Loading status={"Success"} />
+      <br />
+      <Loading status={"error"} />
     </>
   );
 }

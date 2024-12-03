@@ -222,6 +222,19 @@ function App() {
       : null;
   };
 
+  const fruits = ["mango", "apple", "berries", "grapes"];
+
+  const Fruits = () => {
+    return (
+      <ol>
+        <h1>My List Of Fruits</h1>
+        {fruits.map((val) => (
+          <li>{val}</li>
+        ))}
+      </ol>
+    );
+  };
+
   return (
     <>
       <Welcome name={"Steve"} />
@@ -245,6 +258,7 @@ function App() {
       <Loading status={"Success"} />
       <br />
       <Loading status={"error"} />
+      <Fruits />
     </>
   );
 }

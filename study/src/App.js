@@ -235,6 +235,83 @@ function App() {
     );
   };
 
+  const CounterApplication = () => {
+    const [count, setCount] = useState(0);
+
+    function handleIncrement() {
+      setCount((prev) => prev + 1);
+    }
+
+    function handleDecrement() {
+      setCount((prev) => prev - 1);
+    }
+
+    function handleReset() {
+      setCount(0);
+    }
+
+    return (
+      <>
+        <button onClick={handleIncrement}>Increment</button>
+        <button onClick={handleDecrement}>Decrement</button>
+        <button onClick={handleReset}>Reset</button>
+        <p>{count}</p>
+      </>
+    );
+  };
+
+  const SwithApp = () => {
+    const [light, setLight] = useState(false);
+
+    function handleClick() {
+      setLight(!light);
+    }
+
+    return (
+      <>
+        <button onClick={handleClick}>{!light ? "ON" : "OFF"}</button>
+        <div
+          style={{
+            backgroundColor: light ? "yellow" : "black",
+            width: 200,
+            height: 200,
+          }}
+        ></div>
+      </>
+    );
+  };
+
+  const ButtonClick = () => {
+    const [text, setText] = useState(false);
+
+    function handleText() {
+      setText(!text);
+    }
+
+    return (
+      <>
+        <button onClick={handleText}>{!text ? "ClickMe" : "Clicked"}</button>
+      </>
+    );
+  };
+
+  const ListItems = () => {
+    // list to hold our inputs
+    // need a form to create the list
+
+    const list = [];
+
+    return (
+      <div>
+        <form>
+          <input type="text" />
+          <button type="submit">Submit</button>
+          <ul>{list.map((str) => str)}</ul>
+        </form>
+      </div>
+    );
+  };
+
   return (
     <>
       <Welcome name={"Steve"} />
@@ -259,6 +336,14 @@ function App() {
       <br />
       <Loading status={"error"} />
       <Fruits />
+      <br />
+      <CounterApplication />
+      <br />
+      <SwithApp />
+      <br />
+      <ButtonClick />
+      <br />
+      <ListItems />
     </>
   );
 }

@@ -295,19 +295,37 @@ function App() {
     );
   };
 
-  const ListItems = () => {
-    // list to hold our inputs
-    // need a form to create the list
+  //todo: More Questions on lists, keys and forms.
 
-    const list = [];
+  const ListItems = () => {
+    const [list, setList] = useState([]);
+    const [inputvalue, setInputValue] = useState("");
+
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      if (inputvalue.trim() !== "") {
+        setList((prev) => [...prev, inputvalue]);
+        setInputValue("");
+      } else {
+        alert("Kindly write something!");
+      }
+    }
+    function handleChange(e) {
+      setInputValue(e.target.value);
+    }
 
     return (
       <div>
-        <form>
-          <input type="text" />
+        <form onClick={handleSubmit}>
+          <input type="text" value={inputvalue} onChange={handleChange} />
           <button type="submit">Submit</button>
-          <ul>{list.map((str) => str)}</ul>
         </form>
+        <ul>
+          {list.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
       </div>
     );
   };
@@ -342,6 +360,8 @@ function App() {
       <SwithApp />
       <br />
       <ButtonClick />
+      <br />
+      <br />
       <br />
       <ListItems />
     </>

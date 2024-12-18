@@ -356,6 +356,108 @@ function App() {
     });
   }
 
+  //todo Question 1: Counter with Multiple Updates
+  const AppCounter = () => {
+    const [count, setCount] = useState(0);
+
+    return (
+      <>
+        <button
+          onClick={() => {
+            setCount((prev) => prev + 1);
+            setCount((prev) => prev + 1);
+            setCount((prev) => prev + 1);
+          }}
+        >
+          Increment
+        </button>
+        <button
+          onClick={() => {
+            setCount((prev) => prev - 1);
+            setCount((prev) => prev - 1);
+            setCount((prev) => prev - 1);
+          }}
+        >
+          Decrement
+        </button>
+        <p>{count}</p>
+      </>
+    );
+  };
+
+  //todo: Question 2: Toggle Between States
+  const ToggleState = () => {
+    const [toggle, setToggle] = useState(false);
+
+    function handleToggle() {
+      setToggle((prev) => !prev);
+    }
+
+    return (
+      <>
+        <button onClick={handleToggle}>Toggle</button>
+        {toggle && (
+          <div>
+            <p>First</p>
+            <p>Second</p>
+            <p>Third</p>
+          </div>
+        )}
+      </>
+    );
+  };
+
+  //todo: Question 3: Delayed State Updates
+  const DelayedCounter = () => {
+    const [count, setCount] = useState(0);
+    const [loading, setLoading] = useState(false);
+
+    function handleIncrement() {
+      setLoading(true);
+      setTimeout(() => {
+        setCount((prev) => prev + 1);
+        setLoading(false);
+      }, 3000);
+    }
+
+    return (
+      <>
+        <button onClick={handleIncrement} disabled={loading}>
+          IncrementDelay(3s)
+        </button>
+        <p>{loading ? "Updating..." : `Count: ${count}`}</p>
+      </>
+    );
+  };
+
+  //todo: Question 4: Batched Updates
+  const BatchedUpadte = () => {
+    const [count, setCount] = useState(0);
+
+    function handleIncrementSingle() {
+      setCount((prev) => prev + 5);
+    }
+
+    return (
+      <>
+        <button onClick={handleIncrementSingle}>Increment(Single)</button>
+        <button
+          onClick={() => {
+            setCount((prev) => prev + 1);
+            setCount((prev) => prev + 1);
+            setCount((prev) => prev + 1);
+            setCount((prev) => prev + 1);
+            setCount((prev) => prev + 1);
+          }}
+        >
+          {" "}
+          increment(Batched)
+        </button>
+        <p>{count}</p>
+      </>
+    );
+  };
+
   return (
     <>
       <Welcome name={"Steve"} />
@@ -391,6 +493,14 @@ function App() {
       <ListItems />
       <br />
       <RequestTracker />
+      <br />
+      <AppCounter />
+      <br />
+      <ToggleState />
+      <br />
+      <DelayedCounter />
+      <br />
+      <BatchedUpadte />
     </>
   );
 }
